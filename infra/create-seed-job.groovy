@@ -9,9 +9,11 @@ new File("/usr/share/jenkins/seed-job-config.xml").withInputStream { stream ->
 
 def commands = [
     "mkdir -p /var/jenkins_home/workspace/seed",
-    "cp -v /usr/share/jenkins/aaa_folders.groovy /var/jenkins_home/workspace/seed/aaa_folders.groovy",
-    "cp -v /usr/share/jenkins/build_pipelines.groovy /var/jenkins_home/workspace/seed/build_pipelines.groovy",
-    "cp -v /usr/share/jenkins/plugins.groovy /var/jenkins_home/workspace/seed/plugins.groovy"
+    "git clone https://github.com/dineshba/seedJenkins /var/jenkins_home/workspace/seed/seedJenkins",
+    "ls -la /var/jenkins_home/workspace/seed/seedJenkins",
+    "cp -v  /var/jenkins_home/workspace/seed/seedJenkins/seedJobs/aaa_folders.groovy /var/jenkins_home/workspace/seed/aaa_folders.groovy",
+    "cp -v  /var/jenkins_home/workspace/seed/seedJenkins/seedJobs/build_pipelines.groovy /var/jenkins_home/workspace/seed/build_pipelines.groovy",
+    "cp -v  /var/jenkins_home/workspace/seed/seedJenkins/seedJobs/plugins.groovy /var/jenkins_home/workspace/seed/plugins.groovy"
    ]
 commands.each {
   println "Executing command ${it}"
