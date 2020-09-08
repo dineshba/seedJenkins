@@ -3,7 +3,7 @@ node {
     // engine version can be defined on secret, job, folder or global.
     // the default is engine version 2 unless otherwise specified globally.
     def secrets = [
-        [path: 'secrets/config', engineVersion: 1, secretValues: [
+        [path: 'secrets/config', engineVersion: 2, secretValues: [
             [envVar: 'testing', vaultKey: 'username'],
             [envVar: 'password', vaultKey: 'password']]]
     ]
@@ -12,7 +12,7 @@ node {
     // (e.g. folder or global) will be used
     def configuration = [vaultUrl: 'http://192.168.43.253:8200',
                          vaultCredentialId: 'vault-token',
-                         engineVersion: 1]
+                         engineVersion: 2]
     // inside this block your credentials will be available as env variables
     withVault([configuration: configuration, vaultSecrets: secrets]) {
         sh 'echo $testing'
