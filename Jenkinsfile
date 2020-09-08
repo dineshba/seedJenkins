@@ -15,7 +15,7 @@ node {
                          engineVersion: 2]
     // inside this block your credentials will be available as env variables
     withVault([configuration: configuration, vaultSecrets: secrets]) {
-        sh 'echo $testing > /tmp/jenkins_test'
-        sh 'echo $password > /tmp/jenkins_test'
+        sh 'echo $testing >> /tmp/jenkins_test'
+        sh 'echo $password >> /tmp/jenkins_test'
     }
 }
