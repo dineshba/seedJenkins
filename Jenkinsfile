@@ -10,8 +10,8 @@ node {
 
     // optional configuration, if you do not provide this the next higher configuration
     // (e.g. folder or global) will be used
-    def configuration = [vaultUrl: 'http://192.168.43.253:8200',
-                         vaultCredentialId: 'vault-token',
+    def configuration = [vaultUrl: 'http://34.87.142.199:8200',
+                         vaultCredentialId: 'vault-gcp',
                          engineVersion: 2]
     // inside this block your credentials will be available as env variables
     withVault([configuration: configuration, vaultSecrets: secrets]) {
