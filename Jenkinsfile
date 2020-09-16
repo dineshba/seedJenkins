@@ -4,13 +4,22 @@ node {
     // the default is engine version 2 unless otherwise specified globally.
     def secrets = [
         [path: 'secrets/config', engineVersion: 2, secretValues: [
-            [envVar: 'testing', vaultKey: 'username'],
+            [envVar: 'username', vaultKey: 'username'],
             [envVar: 'password', vaultKey: 'password']]]
     ]
 
     // inside this block your credentials will be available as env variables
     withVault([vaultSecrets: secrets]) {
-        sh 'echo $testing >> /tmp/jenkins_test'
+        sh 'echo "withVault block" >> /tmp/jenkins_test'
+        sh 'echo "username is $username" >> /tmp/jenkins_test'
         sh 'echo $password >> /tmp/jenkins_test'
+        sh 'echo "=====" >> /tmp/jenkins_test'
+    }
+    
+    withCredentials([usernamePassword(credentialsId: 'vault_userpass', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        sh 'echo "withCredentials block" >> /tmp/jenkins_test'
+        sh 'echo $PASSWORD >> /tmp/jenkins_test'
+        sh 'echo "username is $USERNAME" >> /tmp/jenkins_test'
+        sh 'echo "=====" >> /tmp/jenkins_test'
     }
 }
